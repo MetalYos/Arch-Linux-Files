@@ -8,7 +8,6 @@ mkfs.fat -F32 /dev/sda1
 mkswap /dev/sda2
 mkfs.ext4 /dev/sda3
 mkfs.ext4 /dev/sda4
-mkfs.ext4 /dev/sda5
 
 # Mount partitions
 swapon /dev/sda2
