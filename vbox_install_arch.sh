@@ -48,9 +48,6 @@ pacstrap /mnt base base-devel openssh linux linux-firmware neovim
 echo -e "${BYellow}[ * ]Generate fstab file${End_Colour}"
 genfstab -U /mnt >> /mnt/etc/fstab
 
-# Enter the new system
-arch-chroot /mnt
-
 # Language-related settings
 echo -e "${BYellow}[ * ]Language-related settings${End_Colour}"
 arch-chroot /mnt sed -i 's/#en_US.UTF-8 UTF-8/en_US.UTF-8 UTF-8/g' /etc/locale.gen
