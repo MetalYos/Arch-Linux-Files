@@ -40,4 +40,4 @@ echo -e "${BYellow}[ * ]Copy i3 config file${End_Colour}"
 mkdir ~/.config/i3
 cp .config/i3/config ~/.config/i3/config
 
-echo -e "${BGreen}Setup Completed !! Reboot Your Machine${End_Colour}"
+echo -e "${BGreen}i3 Setup Completed!!${End_Colour}"
