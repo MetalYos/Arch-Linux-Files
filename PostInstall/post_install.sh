@@ -115,3 +115,5 @@ function Main() {
 	
 	bash ./install_i3.sh
 }
+
+Main
