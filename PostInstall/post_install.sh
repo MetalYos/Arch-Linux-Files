@@ -101,6 +101,12 @@ function InstallAdditionalPackages() {
 	pacman -S iw wpa_supplicant dialog intel-ucode lshw unzip htop wget pulseaudio alsa-utils alsa-plugins pavucontrol xdg-user-dirs neovim openssh
 }
 
+function Installi3() {
+	cd PostInstall
+	bash ./install_i3.sh
+	cd ..
+}
+
 function Main() {
 	SetupLanguage
 	ConfigureTimezone
@@ -112,8 +118,7 @@ function Main() {
 	EnableBluetooth
 	InstallVboxGuestEditions
 	InstallAdditionalPackages
-	
-	bash ./install_i3.sh
+	Installi3
 }
 
 Main
