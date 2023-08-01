@@ -32,12 +32,12 @@ sudo pacman -S firefox vlc obsidian --needed
 
 # Install zsh
 echo -e "${BYellow}[ * ]Install zsh${End_Colour}"
-sudo pacman -S zsh
+sudo pacman -S zsh git
 sh -c "$(wget https://raw.github.com/ohmyzsh/ohmyzsh/master/tools/install.sh -O -)"
 
 # Copy i3 config file
 echo -e "${BYellow}[ * ]Copy i3 config file${End_Colour}"
-mkdir ~/.config/i3
-cp .config/i3/config ~/.config/i3/config
+mkdir /home/yossi/.config/i3
+cp .config/i3/config /home/yossi/.config/i3/config
 
 echo -e "${BGreen}i3 Setup Completed!!${End_Colour}"
