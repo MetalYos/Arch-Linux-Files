@@ -18,6 +18,7 @@ End_Colour="\e[0m"
 hostname=''
 username=''
 password=''
+vmach=''
 
 function CreatePartitions() {
 	# Partition disk
@@ -78,6 +79,7 @@ function MainMenu() {
 	read -p 'Hostname: ' hostname
 	read -p 'Username: ' username
 	read -sp 'Password: ' password
+	read -p 'Virtual Machine engine (0 - none, 1 - vmware, 2 - virtualbox): ' vmach
 
 	echo Starting installation... Good Luck!
 }
@@ -88,7 +90,7 @@ function Main() {
 	UpdateSystemClock
 	InstallArchBase
 	GenerateFStab
-	RunChRoot "${hostname}" "${username}" "${password}"
+	RunChRoot "${hostname}" "${username}" "${password}" "${vmach}"
 	CleanUp
 	
 	echo -e "${BGreen}Setup Completed !! Reboot Your Machine${End_Colour}"

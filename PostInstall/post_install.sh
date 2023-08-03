@@ -96,14 +96,27 @@ function EnableBluetooth() {
 	systemctl enable bluetooth
 }
 
-function InstallVboxGuestEditions() {
+function InstallVMachineGuestEditions() {
 	local username="${1}"
+	local vmach="${2}"
 
-	# Install VirtualBox guest additions
-	echo -e "${BYellow}[ * ]Install VirtualBox guest additions${End_Colour}"
-	pacman -S virtualbox-guest-utils --noconfirm
-	systemctl enable vboxservice.service
-	usermod -a -G vboxsf ${username}
+	if [ $vmach == 1 ]
+	then
+		# Install VMWare guest additions
+		echo -e "${BYellow}[ * ]Install VMWare guest additions${End_Colour}"
+		pacman -S open-vm-tools --noconfirm
+		systemctl enable vmtoolsd.service
+		systemctl enable vmware-vmblock-fuse.service
+	elif [ $vmach == 2 ]
+	then
+		# Install VirtualBox guest additions
+		echo -e "${BYellow}[ * ]Install VirtualBox guest additions${End_Colour}"
+		pacman -S virtualbox-guest-utils --noconfirm
+		systemctl enable vboxservice.service
+		usermod -a -G vboxsf ${username}
+	else
+		echo -e "${BYellow}[ * ]Installed on a Physical Machine!${End_Colour}"
+	fi
 }
 
 function InstallAdditionalPackages() {
@@ -127,7 +140,7 @@ function Main() {
 	SetupUser "${2}" "${3}"
 	EnableServices
 	EnableBluetooth
-	InstallVboxGuestEditions "${2}"
+	InstallVMachineGuestEditions "${2}" "${4}"
 	InstallAdditionalPackages
 	Installi3 "${2}"
 }
