@@ -74,6 +74,9 @@ function SetupUser() {
 	# Giving user sudo privileges
 	echo -e "${BYellow}Giving user sudo privileges[ * ]${End_Colour}"
 	sed -i "s/# %wheel ALL=(ALL:ALL) ALL/%wheel ALL=(ALL:ALL) ALL/" /etc/sudoers
+
+	# Create user dirs
+	su - ${username} -c xdg-user-dirs-update
 }
 
 function EnableServices() {
