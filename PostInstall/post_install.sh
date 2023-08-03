@@ -35,7 +35,6 @@ function ConfigureTimezone() {
 
 function ConfigureHostname() {
 	local hostname="${1}"
-	echo -e "${BBlue}[ * ]Hostname: ${hostname}${BBlue}"
 
 	# Choose a name for your computer (TODO: make this a script argument)
 	echo -e "${BYellow}[ * ]Setting ${hostname} for your computer hostname${End_Colour}"
@@ -51,7 +50,7 @@ function ConfigureHostname() {
 function ConfigureBootloader() {
 	# Install bootloader
 	echo -e "${BYellow}[ * ]Install bootloader${End_Colour}"
-	pacman -S grub-efi-x86_64 efibootmgr
+	pacman -S grub-efi-x86_64 efibootmgr --noconfirm
 	grub-install --target=x86_64-efi --efi-directory=/boot --bootloader-id=arch
 	grub-mkconfig -o /boot/grub/grub.cfg
 }
@@ -59,9 +58,6 @@ function ConfigureBootloader() {
 function SetupUser() {
 	local username="${1}"
 	local password="${2}"
-
-	echo -e "${BBlue}[ * ]Username: ${username}${BBlue}"
-	echo -e "${BBlue}[ * ]Password: ${password}${BBlue}"
 
 	# Creating password for the root user
 	echo -e "${BYellow}[ * ]Setting password for root user${End_Colour}"
@@ -83,7 +79,7 @@ function SetupUser() {
 function EnableServices() {
 	# Enable SSH, NetworkManager and DHCP
 	echo -e "${BYellow}[ * ]Enable SSH, NetworkManager and DHCP${End_Colour}"
-	pacman -S dhcpcd networkmanager network-manager-applet
+	pacman -S dhcpcd networkmanager network-manager-applet  --noconfirm
 	systemctl enable sshd
 	systemctl enable dhcpcd
 	systemctl enable NetworkManager
@@ -92,14 +88,14 @@ function EnableServices() {
 function EnableBluetooth() {
 	# Manage Bluetooth
 	echo -e "${BYellow}Manage Bluetooth[ * ]${End_Colour}"
-	pacman -S bluez bluez-utils blueman
+	pacman -S bluez bluez-utils blueman  --noconfirm
 	systemctl enable bluetooth
 }
 
 function InstallVboxGuestEditions() {
 	# Install VirtualBox guest additions
 	echo -e "${BYellow}[ * ]Install VirtualBox guest additions${End_Colour}"
-	sudo pacman -S virtualbox-guest-utils
+	sudo pacman -S virtualbox-guest-utils  --noconfirm
 	sudo systemctl enable vboxservice.service
 	sudo usermod -a -G vboxsf yossi
 }
@@ -107,7 +103,7 @@ function InstallVboxGuestEditions() {
 function InstallAdditionalPackages() {
 	# Install other useful packages
 	echo -e "${BYellow}[ * ]Install other useful packages${End_Colour}"
-	pacman -S iw wpa_supplicant dialog intel-ucode lshw unzip htop wget pulseaudio alsa-utils alsa-plugins pavucontrol xdg-user-dirs neovim openssh
+	pacman -S iw wpa_supplicant dialog intel-ucode lshw unzip htop wget pulseaudio alsa-utils alsa-plugins pavucontrol xdg-user-dirs neovim openssh  --noconfirm
 }
 
 function Installi3() {
@@ -125,7 +121,7 @@ function Main() {
 	SetupUser "${2}" "${3}"
 	EnableServices
 	EnableBluetooth
-	InstallVboxGuestEditions
+	#InstallVboxGuestEditions
 	InstallAdditionalPackages
 	Installi3
 }

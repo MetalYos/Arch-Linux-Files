@@ -9,31 +9,31 @@ End_Colour="\e[0m"
 
 # Install graphical environment and i3
 echo -e "${BYellow}[ * ]Install graphical environment and i3${End_Colour}"
-sudo pacman -S xorg-server xorg-apps xorg-xinit
-sudo pacman -S i3-gaps i3blocks i3lock i3status numlockx
+sudo pacman -S xorg-server xorg-apps xorg-xinit  --noconfirm
+sudo pacman -S i3-gaps i3blocks i3lock i3status numlockx  --noconfirm
 
 # Install display manager
 echo -e "${BYellow}[ * ]Install display manager${End_Colour}"
-sudo pacman -S lightdm lightdm-gtk-greeter --needed
+sudo pacman -S lightdm lightdm-gtk-greeter --needed  --noconfirm
 sudo systemctl enable lightdm
 
 # Install some basic fonts
 echo -e "${BYellow}[ * ]Install some basic fonts${End_Colour}"
-sudo pacman -S noto-fonts ttf-ubuntu-font-family ttf-dejavu ttf-freefont
-sudo pacman -S ttf-liberation ttf-droid ttf-roboto terminus-font
+sudo pacman -S noto-fonts ttf-ubuntu-font-family ttf-dejavu ttf-freefont  --noconfirm
+sudo pacman -S ttf-liberation ttf-droid ttf-roboto terminus-font  --noconfirm
 
 # Install some useful tools on i3
 echo -e "${BYellow}[ * ]Install some useful tools on i3${End_Colour}"
-sudo pacman -S rxvt-unicode ranger rofi dmenu --needed
+sudo pacman -S rxvt-unicode ranger rofi dmenu --needed  --noconfirm
 
 # Install some GUI programs
 echo -e "${BYellow}[ * ]Install some GUI programs${End_Colour}"
-sudo pacman -S firefox vlc obsidian --needed
+sudo pacman -S firefox vlc --needed  --noconfirm
 
 # Install zsh
 echo -e "${BYellow}[ * ]Install zsh${End_Colour}"
-sudo pacman -S zsh git
-sh -c "$(wget https://raw.github.com/ohmyzsh/ohmyzsh/master/tools/install.sh -O -)"
+sudo pacman -S zsh git  --noconfirm
+echo Y exit | sh -c "$(wget https://raw.github.com/ohmyzsh/ohmyzsh/master/tools/install.sh -O -)"
 
 # Copy i3 config file
 echo -e "${BYellow}[ * ]Copy i3 config file${End_Colour}"
