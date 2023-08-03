@@ -65,7 +65,7 @@ function SetupUser() {
 
 	# Creating password for the root user
 	echo -e "${BYellow}[ * ]Setting password for root user${End_Colour}"
-	usermod --password ${password}
+	usermod --password ${password} root
 
 	# Add user
 	echo -e "${BYellow}[ * ]Add user ${username}${End_Colour}"

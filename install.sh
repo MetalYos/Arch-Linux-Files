@@ -88,7 +88,7 @@ function Main() {
 	UpdateSystemClock
 	InstallArchBase
 	GenerateFStab
-	RunChRoot hostname username password
+	RunChRoot "${hostname}" "${username}" "${password}"
 	CleanUp
 	
 	echo -e "${BGreen}Setup Completed !! Reboot Your Machine${End_Colour}"
