@@ -70,6 +70,7 @@ mkdir -p /home/${username}/.local/share/nvim/data
 cd ..
 
 # Change owner and group of local and config
-chown -R ${username}:users .config .local
+chown -R ${username}:users .config
+chown -R ${username}:users .local
 
 echo -e "${BGreen}i3 Setup Completed!!${End_Colour}"
