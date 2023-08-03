@@ -76,10 +76,10 @@ function CleanUp() {
 
 function MainMenu() {
 	echo "Welcome to Yossi's Arch Linux installation script"
+	read -p 'Virtual Machine engine (0 - none, 1 - vmware, 2 - virtualbox): ' vmach
 	read -p 'Hostname: ' hostname
 	read -p 'Username: ' username
 	read -sp 'Password: ' password
-	read -p 'Virtual Machine engine (0 - none, 1 - vmware, 2 - virtualbox): ' vmach
 
 	echo Starting installation... Good Luck!
 }
