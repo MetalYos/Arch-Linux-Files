@@ -7,6 +7,10 @@ BYellow="\e[1;33m"
 # BBlue="\e[1;34m"
 End_Colour="\e[0m"
 
+hostname=$1
+username=$2
+password=$3
+
 function EnableParallelPacman() {
 	# Enabling parallel downloads for pacman
 	echo -e "${BYellow}[ * ]Enabling parallel downloads for pacman${End_Colour}"
@@ -35,14 +39,14 @@ function ConfigureTimezone() {
 
 function ConfigureHostname() {
 	# Choose a name for your computer (TODO: make this a script argument)
-	echo -e "${BYellow}[ * ]Choose a name for your computer${End_Colour}"
-	echo arch-i3 > /etc/hostname
+	echo -e "${BYellow}[ * ]Setting ${hostname} for your computer hostname${End_Colour}"
+	echo ${hostname} > /etc/hostname
 	
 	# Adding content to the hosts file
 	echo -e "${BYellow}[ * ]Adding content to the hosts file${End_Colour}"
 	echo 127.0.0.1		localhost.localdomain		localhost >> /etc/hosts
 	echo ::1			localhost.localdomain		localhost >> /etc/hosts
-	echo 127.0.0.1		arch-i3.localdomain			arch-i3 >> /etc/hosts
+	echo 127.0.0.1		${hostname}.localdomain			${hostname} >> /etc/hosts
 }
 
 function ConfigureBootloader() {
@@ -55,16 +59,16 @@ function ConfigureBootloader() {
 
 function SetupUser() {
 	# Creating password for the root user
-	echo -e "${BYellow}[ * ]Enter root password${End_Colour}"
-	passwd
+	echo -e "${BYellow}[ * ]Setting password for root user${End_Colour}"
+	usermod --password ${password}
 
 	# Add user
-	echo -e "${BYellow}[ * ]Add user${End_Colour}"
-	useradd -m -g users -G wheel,storage,power,audio yossi
+	echo -e "${BYellow}[ * ]Add user ${username}${End_Colour}"
+	useradd -m -g users -G wheel,storage,power,audio ${username}
 
 	# Creating password for the new user
-	echo -e "${BYellow}[ * ]Enter new user password${End_Colour}"
-	passwd yossi
+	echo -e "${BYellow}[ * ]Set password for user ${username}${End_Colour}"
+	echo "${username}:${password}" | chpasswd
 
 	# Giving user sudo privileges
 	echo -e "${BYellow}Giving user sudo privileges[ * ]${End_Colour}"

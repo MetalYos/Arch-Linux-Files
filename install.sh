@@ -15,6 +15,10 @@ BYellow="\e[1;33m"
 # BBlue="\e[1;34m"
 End_Colour="\e[0m"
 
+hostname=''
+username=''
+password=''
+
 function CreatePartitions() {
 	# Partition disk
 	echo -e "${BYellow}[ * ]Paritioning the disk${End_Colour}"
@@ -58,7 +62,7 @@ function GenerateFStab() {
 
 function RunChRoot() {
     mv PostInstall /mnt/PostInstall
-    arch-chroot /mnt bash "PostInstall/post_install.sh"
+    arch-chroot /mnt bash "PostInstall/post_install.sh" $1 $2 $3
     rm -rf /mnt/PostInstall
 }
 
@@ -69,12 +73,22 @@ function CleanUp() {
 	swapoff /dev/sda2
 }
 
+function MainMenu() {
+	echo "Welcome to Yossi's Arch Linux installation script"
+	read -p 'Hostname: ' hostname
+	read -p 'Username: ' username
+	read -sp 'Password: ' password
+
+	echo Starting installation... Good Luck!
+}
+
 function Main() {
+	MainMenu
 	CreatePartitions
 	UpdateSystemClock
 	InstallArchBase
 	GenerateFStab
-	RunChRoot
+	RunChRoot hostname username password
 	CleanUp
 	
 	echo -e "${BGreen}Setup Completed !! Reboot Your Machine${End_Colour}"
