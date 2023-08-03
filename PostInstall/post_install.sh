@@ -76,6 +76,7 @@ function SetupUser() {
 	sed -i "s/# %wheel ALL=(ALL:ALL) ALL/%wheel ALL=(ALL:ALL) ALL/" /etc/sudoers
 
 	# Create user dirs
+	pacman -S xdg-user-dirs --noconfirm
 	su - ${username} -c xdg-user-dirs-update
 }
 
@@ -106,7 +107,7 @@ function InstallVboxGuestEditions() {
 function InstallAdditionalPackages() {
 	# Install other useful packages
 	echo -e "${BYellow}[ * ]Install other useful packages${End_Colour}"
-	pacman -S iw wpa_supplicant dialog intel-ucode lshw unzip htop wget pulseaudio alsa-utils alsa-plugins pavucontrol xdg-user-dirs neovim openssh  --noconfirm
+	pacman -S iw wpa_supplicant dialog intel-ucode lshw unzip htop wget pulseaudio alsa-utils alsa-plugins pavucontrol neovim openssh  --noconfirm
 }
 
 function Installi3() {
