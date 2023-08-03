@@ -107,12 +107,12 @@ function InstallVboxGuestEditions() {
 function InstallAdditionalPackages() {
 	# Install other useful packages
 	echo -e "${BYellow}[ * ]Install other useful packages${End_Colour}"
-	pacman -S iw wpa_supplicant dialog intel-ucode lshw unzip htop wget pulseaudio alsa-utils alsa-plugins pavucontrol neovim openssh  --noconfirm
+	pacman -S iw wpa_supplicant dialog intel-ucode lshw unzip htop wget pulseaudio alsa-utils alsa-plugins pavucontrol neovim openssh git dgb valgrind  --noconfirm
 }
 
 function Installi3() {
 	cd PostInstall
-	bash ./install_i3.sh
+	bash ./install_i3.sh "${1}"
 	cd ..
 }
 
@@ -127,7 +127,7 @@ function Main() {
 	EnableBluetooth
 	InstallVboxGuestEditions
 	InstallAdditionalPackages
-	Installi3
+	Installi3 "${2}"
 }
 
 Main "$@"
