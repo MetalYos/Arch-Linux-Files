@@ -23,7 +23,7 @@ function CreatePartitions() {
 	# Partition disk
 	echo -e "${BYellow}[ * ]Paritioning the disk${End_Colour}"
 	sgdisk -o /dev/sda
-	sgdisk -n 1:0:+1G -n 2:0:+4G -n 3:0:+10G -n 4:0:0 /dev/sda
+	sgdisk -n 1:0:+1G -n 2:0:+4G -n 3:0:+20G -n 4:0:0 /dev/sda
 	sgdisk -t 1:EF00 -t 2:8200 -t 3:8304 -t 4:8302
 
 	# Format partitions
