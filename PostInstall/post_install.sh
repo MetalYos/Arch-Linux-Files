@@ -4,12 +4,8 @@
 BRed="\e[1;31m"
 BGreen="\e[1;32m"
 BYellow="\e[1;33m"
-# BBlue="\e[1;34m"
+BBlue="\e[1;34m"
 End_Colour="\e[0m"
-
-hostname=$1
-username=$2
-password=$3
 
 function EnableParallelPacman() {
 	# Enabling parallel downloads for pacman
@@ -38,6 +34,9 @@ function ConfigureTimezone() {
 }
 
 function ConfigureHostname() {
+	local hostname="${1}"
+	echo -e "${BBlue}[ * ]Hostname: ${hostname}${BBlue}"
+
 	# Choose a name for your computer (TODO: make this a script argument)
 	echo -e "${BYellow}[ * ]Setting ${hostname} for your computer hostname${End_Colour}"
 	echo ${hostname} > /etc/hostname
@@ -58,6 +57,12 @@ function ConfigureBootloader() {
 }
 
 function SetupUser() {
+	local username="${1}"
+	local password="${2}"
+
+	echo -e "${BBlue}[ * ]Username: ${username}${BBlue}"
+	echo -e "${BBlue}[ * ]Password: ${password}${BBlue}"
+
 	# Creating password for the root user
 	echo -e "${BYellow}[ * ]Setting password for root user${End_Colour}"
 	usermod --password ${password}
@@ -114,10 +119,10 @@ function Installi3() {
 function Main() {
 	SetupLanguage
 	ConfigureTimezone
-	ConfigureHostname
+	ConfigureHostname "${1}"
 	ConfigureBootloader
 	EnableParallelPacman
-	SetupUser
+	SetupUser "${2}" "${3}"
 	EnableServices
 	EnableBluetooth
 	InstallVboxGuestEditions
@@ -125,4 +130,4 @@ function Main() {
 	Installi3
 }
 
-Main
+Main "$@"
