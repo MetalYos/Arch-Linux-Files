@@ -34,7 +34,7 @@ sudo pacman -S firefox vlc --needed --noconfirm
 
 # Install zsh
 echo -e "${BYellow}[ * ]Install zsh${End_Colour}"
-sudo pacman -S zsh --noconfirm
+sudo pacman -S zsh git --noconfirm
 echo Y exit | sh -c "$(wget https://raw.github.com/ohmyzsh/ohmyzsh/master/tools/install.sh -O -)"
 
 # Install LX LXAppearance and themes
