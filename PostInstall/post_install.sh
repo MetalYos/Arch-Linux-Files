@@ -125,7 +125,7 @@ function Main() {
 	SetupUser "${2}" "${3}"
 	EnableServices
 	EnableBluetooth
-	#InstallVboxGuestEditions
+	InstallVboxGuestEditions
 	InstallAdditionalPackages
 	Installi3
 }
