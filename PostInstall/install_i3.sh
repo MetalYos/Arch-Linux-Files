@@ -55,18 +55,18 @@ echo "include ./theme.conf" > /home/${username}/.config/kitty/kitty.conf
 
 # Copy i3 config file
 echo -e "${BYellow}[ * ]Copy i3 config file${End_Colour}"
-mkdir /home/${username}/.config/i3
+su - ${username} -c mkdir /home/${username}/.config/i3
 cp .config/i3/config /home/${username}/.config/i3/config
 
 # Downloading nvim configuration files
 echo -e "${BYellow}[ * ]Downloading nvim configuration${End_Colour}"
 git clone https://github.com/optimizacija/neovim-config.git
-mkdir -p /home/${username}/.config/nvim
+su - ${username} -c mkdir -p /home/${username}/.config/nvim
 cd neovim-config
 cp -r *.* /home/${username}/.config/nvim
 cp -r assets /home/${username}/.config/nvim
 cp -r lua /home/${username}/.config/nvim
-mkdir -p /home/${username}/.local/share/nvim/data
+su - ${username} -c mkdir -p /home/${username}/.local/share/nvim/data
 cd ..
 
 echo -e "${BGreen}i3 Setup Completed!!${End_Colour}"

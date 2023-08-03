@@ -122,7 +122,7 @@ function InstallVMachineGuestEditions() {
 function InstallAdditionalPackages() {
 	# Install other useful packages
 	echo -e "${BYellow}[ * ]Install other useful packages${End_Colour}"
-	pacman -S iw wpa_supplicant dialog intel-ucode lshw unzip htop wget pulseaudio alsa-utils alsa-plugins pavucontrol neovim openssh git gdb valgrind --noconfirm
+	pacman -S iw wpa_supplicant dialog intel-ucode lshw unzip htop wget pulseaudio alsa-utils alsa-plugins pavucontrol neovim openssh git gdb valgrind man --noconfirm
 }
 
 function Installi3() {
