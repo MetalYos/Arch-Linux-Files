@@ -35,6 +35,16 @@ echo -e "${BYellow}[ * ]Install zsh${End_Colour}"
 sudo pacman -S zsh git  --noconfirm
 echo Y exit | sh -c "$(wget https://raw.github.com/ohmyzsh/ohmyzsh/master/tools/install.sh -O -)"
 
+# Install LX LXAppearance and themes
+echo -e "${BYellow}[ * ]Install LX LXAppearance and themes${End_Colour}"
+sudo pacman -S lxappearance arc-gtk-theme papirus-icon-theme --noconfirm
+
+# Customize LightDM
+echo -e "${BYellow}[ * ]Customize LightDM${End_Colour}"
+sudo sed -i 's/#background=/background=#2f343f/g' /etc/lightdm/lightdm-gtk-greeter.conf
+sudo sed -i 's/#icon-theme-name=/icon-theme-name=Papirus-Dark/g' /etc/lightdm/lightdm-gtk-greeter.conf
+sudo sed -i 's/#theme-name=/theme-name=Arc-Dark/g' /etc/lightdm/lightdm-gtk-greeter.conf
+
 # Copy i3 config file
 echo -e "${BYellow}[ * ]Copy i3 config file${End_Colour}"
 mkdir /home/yossi/.config/i3
