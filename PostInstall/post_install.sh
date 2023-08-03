@@ -83,7 +83,7 @@ function SetupUser() {
 function EnableServices() {
 	# Enable SSH, NetworkManager and DHCP
 	echo -e "${BYellow}[ * ]Enable SSH, NetworkManager and DHCP${End_Colour}"
-	pacman -S dhcpcd networkmanager network-manager-applet  --noconfirm
+	pacman -S dhcpcd networkmanager network-manager-applet --noconfirm
 	systemctl enable sshd
 	systemctl enable dhcpcd
 	systemctl enable NetworkManager
@@ -92,22 +92,24 @@ function EnableServices() {
 function EnableBluetooth() {
 	# Manage Bluetooth
 	echo -e "${BYellow}Manage Bluetooth[ * ]${End_Colour}"
-	pacman -S bluez bluez-utils blueman  --noconfirm
+	pacman -S bluez bluez-utils blueman --noconfirm
 	systemctl enable bluetooth
 }
 
 function InstallVboxGuestEditions() {
+	local username="${1}"
+
 	# Install VirtualBox guest additions
 	echo -e "${BYellow}[ * ]Install VirtualBox guest additions${End_Colour}"
-	sudo pacman -S virtualbox-guest-utils  --noconfirm
-	sudo systemctl enable vboxservice.service
-	sudo usermod -a -G vboxsf yossi
+	pacman -S virtualbox-guest-utils --noconfirm
+	systemctl enable vboxservice.service
+	usermod -a -G vboxsf ${username}
 }
 
 function InstallAdditionalPackages() {
 	# Install other useful packages
 	echo -e "${BYellow}[ * ]Install other useful packages${End_Colour}"
-	pacman -S iw wpa_supplicant dialog intel-ucode lshw unzip htop wget pulseaudio alsa-utils alsa-plugins pavucontrol neovim openssh git dgb valgrind  --noconfirm
+	pacman -S iw wpa_supplicant dialog intel-ucode lshw unzip htop wget pulseaudio alsa-utils alsa-plugins pavucontrol neovim openssh git gdb valgrind --noconfirm
 }
 
 function Installi3() {
@@ -125,7 +127,7 @@ function Main() {
 	SetupUser "${2}" "${3}"
 	EnableServices
 	EnableBluetooth
-	InstallVboxGuestEditions
+	InstallVboxGuestEditions "${2}"
 	InstallAdditionalPackages
 	Installi3 "${2}"
 }
