@@ -51,7 +51,7 @@ sudo sed -i 's/#theme-name=/theme-name=Arc-Dark/g' /etc/lightdm/lightdm-gtk-gree
 echo -e "${BYellow}[ * ]Install Kitty themes${End_Colour}"
 git clone --depth 1 https://github.com/dexpota/kitty-themes.git /home/${username}/.config/kitty/kitty-themes
 ln -s /home/${username}/.config/kitty/kitty-themes/themes/Dracula.conf /home/${username}/.config/kitty/theme.conf
-sed -i '1s/^/include ./theme.conf\n/' /home/${username}/.config/kitty/kitty.conf
+echo "include ./theme.conf" > /home/${username}/.config/kitty/kitty.conf
 
 # Copy i3 config file
 echo -e "${BYellow}[ * ]Copy i3 config file${End_Colour}"
