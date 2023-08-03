@@ -49,23 +49,23 @@ sed -i 's/#theme-name=/theme-name=Arc-Dark/g' /etc/lightdm/lightdm-gtk-greeter.c
 
 # Install Kitty themes
 echo -e "${BYellow}[ * ]Install Kitty themes${End_Colour}"
-git clone --depth 1 https://github.com/dexpota/kitty-themes.git /home/${username}/.config/kitty/kitty-themes
-ln -s /home/${username}/.config/kitty/kitty-themes/themes/Dracula.conf /home/${username}/.config/kitty/theme.conf
-echo "include ./theme.conf" > /home/${username}/.config/kitty/kitty.conf
+su - ${username} -c git clone --depth 1 https://github.com/dexpota/kitty-themes.git /home/${username}/.config/kitty/kitty-themes
+su - ${username} -c ln -s /home/${username}/.config/kitty/kitty-themes/themes/Dracula.conf /home/${username}/.config/kitty/theme.conf
+su - ${username} -c echo "include ./theme.conf" > /home/${username}/.config/kitty/kitty.conf
 
 # Copy i3 config file
 echo -e "${BYellow}[ * ]Copy i3 config file${End_Colour}"
 su - ${username} -c mkdir /home/${username}/.config/i3
-cp .config/i3/config /home/${username}/.config/i3/config
+su - ${username} -c cp .config/i3/config /home/${username}/.config/i3/config
 
 # Downloading nvim configuration files
 echo -e "${BYellow}[ * ]Downloading nvim configuration${End_Colour}"
-git clone https://github.com/optimizacija/neovim-config.git
+su - ${username} -c git clone https://github.com/optimizacija/neovim-config.git
 su - ${username} -c mkdir -p /home/${username}/.config/nvim
 cd neovim-config
-cp -r *.* /home/${username}/.config/nvim
-cp -r assets /home/${username}/.config/nvim
-cp -r lua /home/${username}/.config/nvim
+su - ${username} -c cp -r *.* /home/${username}/.config/nvim
+su - ${username} -c cp -r assets /home/${username}/.config/nvim
+su - ${username} -c cp -r lua /home/${username}/.config/nvim
 su - ${username} -c mkdir -p /home/${username}/.local/share/nvim/data
 cd ..
 
