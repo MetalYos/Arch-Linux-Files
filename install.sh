@@ -63,7 +63,7 @@ function GenerateFStab() {
 
 function RunChRoot() {
     mv PostInstall /mnt/PostInstall
-    arch-chroot /mnt bash "PostInstall/post_install.sh" "${1}" "${2}" "${3}"
+    arch-chroot /mnt bash "PostInstall/post_install.sh" "${1}" "${2}" "${3}" "${4}"
     rm -rf /mnt/PostInstall
 }
 
