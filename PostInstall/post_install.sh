@@ -135,13 +135,15 @@ function CopyConfigFiles() {
 	local username="${1}"
 	
 	# Copy i3 config file
+	cd PostInstall
 	echo -e "${BYellow}[ * ]Copy .config and .local folder${End_Colour}"
 	cp -r .config /home/${username}/
 	cp -r .local /home/${username}/
+	cd ..
 
 	# Change owner and group of local and config
-	chown -R ${username}:users .config
-	chown -R ${username}:users .local
+	chown -R ${username}:users /home/${username}/.config
+	chown -R ${username}:users /home/${username}/.local
 }
 
 function Main() {
