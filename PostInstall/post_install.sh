@@ -131,6 +131,19 @@ function Installi3() {
 	cd ..
 }
 
+function CopyConfigFiles() {
+	local username="${1}"
+	
+	# Copy i3 config file
+	echo -e "${BYellow}[ * ]Copy .config and .local folder${End_Colour}"
+	cp .config -r /home/${username}/
+	cp .local -r /home/${username}/
+
+	# Change owner and group of local and config
+	chown -R ${username}:users .config
+	chown -R ${username}:users .local
+}
+
 function Main() {
 	SetupLanguage
 	ConfigureTimezone
@@ -143,6 +156,7 @@ function Main() {
 	InstallVMachineGuestEditions "${2}" "${4}"
 	InstallAdditionalPackages
 	Installi3 "${2}"
+	CopyConfigFiles "${2}"
 }
 
 Main "$@"
