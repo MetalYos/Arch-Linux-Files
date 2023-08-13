@@ -50,8 +50,8 @@ function ConfigureHostname() {
 function ConfigureBootloader() {
 	# Install bootloader
 	echo -e "${BYellow}[ * ]Install bootloader${End_Colour}"
-	pacman -S grub-efi-x86_64 efibootmgr --noconfirm
-	grub-install --target=x86_64-efi --efi-directory=/boot --bootloader-id=arch
+	pacman -S grub --noconfirm
+	grub-install --target=i386-pc /dev/sda
 	grub-mkconfig -o /boot/grub/grub.cfg
 }
 
