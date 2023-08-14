@@ -23,7 +23,9 @@ vmach=''
 function CreatePartitions() {
 	# Partition disk
 	echo -e "${BYellow}[ * ]Paritioning the disk${End_Colour}"
-	parted /dev/sda mklabel msdos mkpart primary linux-swap 1MiB 4GiB mkpart primary ext4 4GiB 99% set 2 boot on 
+	parted /dev/sda mklabel msdos
+	parted /dev/sda mkpart primary linux-swap 1MiB 4GiB mkpart primary ext4 4GiB 99%
+	parted /dev/sda set 2 boot on
 
 	# Format partitions
 	echo -e "${BYellow}[ * ]Format the partitions${End_Colour}"
