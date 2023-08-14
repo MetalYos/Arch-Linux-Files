@@ -51,7 +51,7 @@ function ConfigureBootloader() {
 	# Install bootloader
 	echo -e "${BYellow}[ * ]Install bootloader${End_Colour}"
 	pacman -S grub --noconfirm
-	grub-install --target=i386-pc /dev/sda
+	grub-install --recheck --target=i386-pc /dev/sda
 	grub-mkconfig -o /boot/grub/grub.cfg
 }
 

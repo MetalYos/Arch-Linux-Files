@@ -23,22 +23,17 @@ vmach=''
 function CreatePartitions() {
 	# Partition disk
 	echo -e "${BYellow}[ * ]Paritioning the disk${End_Colour}"
-	sgdisk -o /dev/sda
-	sgdisk -n 1:0:+1M -n 2:0:+4G -n 3:0:+20G -n 4:0:0 /dev/sda
-	sgdisk -t 1:EF02 -t 2:8200 -t 3:8304 -t 4:8302
+	parted /dev/sda mklabel msdos mkpart primary linux-swap 1MiB 4GiB mkpart primary ext4 4GiB 99% set 2 boot on 
 
 	# Format partitions
 	echo -e "${BYellow}[ * ]Format the partitions${End_Colour}"
-	mkswap /dev/sda2
-	mkfs.ext4 /dev/sda3
-	mkfs.ext4 /dev/sda4
+	mkswap /dev/sda1
+	mkfs.ext4 -F /dev/sda2
 
 	# Mount partitions
 	echo -e "${BYellow}[ * ]Mount the partitions${End_Colour}"
-	swapon /dev/sda2
-	mount /dev/sda3 /mnt
-	mkdir /mnt/home
-	mount /dev/sda4 /mnt/home
+	swapon /dev/sda1
+	mount /dev/sda2 /mnt
 }
 
 function UpdateSystemClock() {
