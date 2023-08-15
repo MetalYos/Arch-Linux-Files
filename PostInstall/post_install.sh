@@ -11,6 +11,7 @@ function EnableParallelPacman() {
 	# Enabling parallel downloads for pacman
 	echo -e "${BYellow}[ * ]Enabling parallel downloads for pacman${End_Colour}"
 	sed -i "s/#ParallelDownloads = 5/ParallelDownloads = 5/g" /etc/pacman.conf
+	pacman -Sy
 }
 
 function SetupLanguage() {
@@ -122,7 +123,7 @@ function InstallVMachineGuestEditions() {
 function InstallAdditionalPackages() {
 	# Install other useful packages
 	echo -e "${BYellow}[ * ]Install other useful packages${End_Colour}"
-	pacman -S iw wpa_supplicant dialog intel-ucode lshw unzip htop wget pulseaudio alsa-utils alsa-plugins pavucontrol neovim openssh git gdb valgrind man --noconfirm
+	pacman -S iw wpa_supplicant dialog intel-ucode lshw unzip htop wget pulseaudio alsa-utils alsa-plugins pavucontrol neovim openssh git gdb valgrind man tmux --noconfirm
 }
 
 function Installi3() {

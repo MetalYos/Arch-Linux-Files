@@ -20,6 +20,13 @@ username=''
 password=''
 vmach=''
 
+function EnableParallelPacman() {
+	# Enabling parallel downloads for pacman
+	echo -e "${BYellow}[ * ]Enabling parallel downloads for pacman${End_Colour}"
+	sed -i "s/#Color/Color/g" /etc/pacman.conf
+	sed -i "s/#ParallelDownloads = 5/ParallelDownloads = 5/g" /etc/pacman.conf
+}
+
 function CreatePartitions() {
 	# Partition disk
 	echo -e "${BYellow}[ * ]Paritioning the disk${End_Colour}"
@@ -81,6 +88,7 @@ function MainMenu() {
 
 function Main() {
 	MainMenu
+	EnableParallelPacman
 	CreatePartitions
 	UpdateSystemClock
 	InstallArchBase
