@@ -17,8 +17,8 @@ vim.api.nvim_set_keymap('v', 'K', '9j', opts)
 vim.api.nvim_set_keymap('v', 'L', '9k', opts)
 
 -- stay in normal mode after inserting a new line
-vim.api.nvim_set_keymap('', 'o', 'o <Bs><Esc>', opts)
-vim.api.nvim_set_keymap('', 'O', 'O <Bs><Esc>', opts)
+-- vim.api.nvim_set_keymap('', 'o', 'o <Bs><Esc>', opts)
+-- vim.api.nvim_set_keymap('', 'O', 'O <Bs><Esc>', opts)
 
 -- mapping that opens .vimrc in a new tab for quick editing
 vim.api.nvim_set_keymap('n', '<Leader>ev', '<Cmd>tabe $MYVIMRC<CR>', opts)
