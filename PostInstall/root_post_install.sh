@@ -7,6 +7,19 @@ BYellow="\e[1;33m"
 BBlue="\e[1;34m"
 End_Colour="\e[0m"
 
+function SetupPacman() {
+	# Enabling parallel downloads for pacman
+	echo -e "${BYellow}[ * ]Enabling parallel downloads for pacman${End_Colour}"
+	sed -i "s/#ParallelDownloads = 5/ParallelDownloads = 20/g" /etc/pacman.conf
+	# Enabling color for pacman
+	echo -e "${BYellow}[ * ]Enabling color for pacman${End_Colour}"
+	sed -i "s/#Color/Color/g" /etc/pacman.conf
+	echo -e "${BYellow}[ * ]Enabling multilib (lib32 packages) for pacman${End_Colour}"
+	sed -i "s/#\[multilib\]/\[multilib\]/" /etc/pacman.conf
+	tac /etc/pacman.conf | sed "0,/#Include/ s//Include/" | tac > pacman.conf
+	mv pacman.conf /etc/pacman.conf
+}
+
 function ConfigureTimezone() {
 	# Configure timezone
 	echo -e "${BYellow}[ * ]Configure timezone${End_Colour}"
@@ -96,20 +109,8 @@ function SetupUser() {
 	su - ${username} -c xdg-user-dirs-update
 }
 
-function SetupPacman() {
-	# Enabling parallel downloads for pacman
-	echo -e "${BYellow}[ * ]Enabling parallel downloads for pacman${End_Colour}"
-	sed -i "s/#ParallelDownloads = 5/ParallelDownloads = 20/g" /etc/pacman.conf
-	# Enabling color for pacman
-	echo -e "${BYellow}[ * ]Enabling color for pacman${End_Colour}"
-	sed -i "s/#Color/Color/g" /etc/pacman.conf
-	echo -e "${BYellow}[ * ]Enabling multilib (lib32 packages) for pacman${End_Colour}"
-	sed -i "s/#\[multilib\]/\[multilib\]/" /etc/pacman.conf
-	tac /etc/pacman.conf | sed "0,/#Include/ s//Include/" | tac > pacman.conf
-	mv pacman.conf /etc/pacman.conf
-}
-
 function Main() {
+	SetupPacman
 	SetupLocale
 	ConfigureTimezone
 	ConfigureHostname "${1}"
@@ -117,7 +118,6 @@ function Main() {
 	EnableBluetooth
 	ConfigureBootloader
 	SetupUser "${2}" "${3}"
-	SetupPacman
 }
 
 Main "$@"

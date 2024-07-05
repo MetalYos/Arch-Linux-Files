@@ -122,7 +122,7 @@ function MountPartitions() {
 function InstallArchBase() {
 	# Install Arch packages
 	echo -e "${BYellow}[ * ]Install Arch packages${End_Colour}"
-	pacstrap /mnt base base-devel linux linux-firmware linux-headers btrfs-progs vim nano
+	pacstrap -K /mnt base base-devel linux linux-firmware linux-headers btrfs-progs vim nano
 }
 
 function GenerateFStab() {
@@ -174,14 +174,14 @@ function MainMenu() {
 		sleep 3
 	fi
 
-	if [[ "$hd_device" == *"nvme"* ]]; then
-		boot_part="${hd_device}p1"
-		swap_part="${hd_device}p2"
-		root_part="${hd_device}p3"
-	else
+	if [[ "$hd_device" == *"sd"* ]]; then
 		boot_part="${hd_device}1"
 		swap_part="${hd_device}2"
 		root_part="${hd_device}3"
+	else
+		boot_part="${hd_device}p1"
+		swap_part="${hd_device}p2"
+		root_part="${hd_device}p3"
 	fi
 
 	echo Starting installation... Good Luck!

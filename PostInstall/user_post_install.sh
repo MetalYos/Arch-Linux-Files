@@ -10,19 +10,6 @@ End_Colour="\e[0m"
 username=${1}
 password=${2}
 
-function InstallAdditionalPackages() {
-	# Install other useful packages
-	echo -e "${BYellow}[ * ]Install useful packages${End_Colour}"
-	echo "${password}" | sudo -S pacman-key --init
-	echo "${password}" | sudo -S pacman -S udisks2 udiskie timeshift dosfstools ntfs-3g iw wpa_supplicant dialog intel-ucode lshw unzip htop wget openssh git gdb valgrind man tldr stow bash-completion reflector --noconfirm
-
-    echo -e "${BYellow}[ * ]Copying polkit rule for storage automounting${End_Colour}"
-    cur_dir=pwd
-    cd /PostInstall
-    cp 10-udisks2.rules /etc/polkit-1/rules.d/
-    cd ${cur_dir}
-}
-
 function InstallAurHelper() {
 	echo -e "${BYellow}[ * ]Install the YAY AUR helper${End_Colour}"
     cur_dir=pwd
@@ -33,6 +20,29 @@ function InstallAurHelper() {
 	cd ..
 	rm -Rf yay
     cd ${cur_dir}
+}
+
+function InstallAdditionalPackages() {
+	# Install other useful packages
+	echo -e "${BYellow}[ * ]Install useful packages${End_Colour}"
+	echo "${password}" | sudo -S pacman-key --init
+	echo "${password}" | sudo -S pacman -S timeshift dosfstools ntfs-3g iw wpa_supplicant dialog intel-ucode lshw unzip htop wget openssh git gdb valgrind man tldr stow bash-completion reflector --noconfirm
+
+    yay -S timeshift-autosnap
+}
+
+function EnableAutoUsbMounting() {
+	# Install udisks and enable auto USB mounting
+	echo -e "${BYellow}[ * ]Install udisks and enable USB storage automounting${End_Colour}"
+	echo "${password}" | sudo -S pacman-key --init
+	echo "${password}" | sudo -S pacman -S udisks2 udiskie --noconfirm
+
+    echo -e "${BYellow}[ * ]Copying polkit rule for USB storage automounting${End_Colour}"
+    cur_dir=pwd
+    cd /PostInstall
+    cp 10-udisks2.rules /etc/polkit-1/rules.d/
+    cd ${cur_dir}
+
 }
 
 function InstallPipewireAudio() {
@@ -70,12 +80,16 @@ function Installi3() {
 	yay -S brave-bin --noconfirm
 }
 
+function InstallAuthenticationAgent() {
+    echo "${password}" | sudo -S pacman -S polkit-gnome
+}
+
 function InstallNotificationServer() {
-	echo -e "${BYellow}[ * ]Notification Server window manager${End_Colour}"
+	echo -e "${BYellow}[ * ]Notification Server for window manager${End_Colour}"
     echo "${password}" | sudo -S pacman -S libnotify notification-daemon
     cur_dir=pwd
     cd /PostInstall
-    cp org.freedesktop.Notification.service /usr/share/dbus-1/services/
+    echo "${password}" | sudo -S cp org.freedesktop.Notification.service /usr/share/dbus-1/services/
     cd ${cur_dir}
 }
 
@@ -98,23 +112,26 @@ function CopyConfigFiles() {
 }
 
 function SetupGitConfig() {
+    # TODO: get values in installation script
     git config --global user.email "metalyos@gmail.com"
     git config --global user.name "MetalYos"
 }
 
 function Main() {
 	echo -e "${BYello}[ * ]Entered user_post_install script with arguments ${username} ${password}${End_Colour}"
-	InstallAdditionalPackages
 	InstallAurHelper
+	InstallAdditionalPackages
+    EnableAutoUsbMounting
 	InstallPipewireAudio
 	InstallDisplayServer
 	InstallDisplayManager
 	Installi3
+    InstallAuthenticationAgent
     InstallNotificationServer
 	InstallNeovim
 	CopyConfigFiles
 
-    # SetupGitConfig
+    SetupGitConfig
 }
 
 Main "$@"
