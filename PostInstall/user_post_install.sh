@@ -61,7 +61,7 @@ function InstallDisplayServer() {
 
 function InstallDisplayManager() {
 	echo -e "${BYellow}[ * ]Install SDDM display manager${End_Colour}"
-	echo "${password}" | sudo -S pacman -S sddm --noconfirm
+	echo "${password}" | sudo -S pacman -S sddm qt6-5compat qt6-declarative qt6-svg --noconfirm
 	sudo systemctl enable sddm.service
 
 	echo -e "${BYellow}[ * ]Copy default sddm config file to local folder${End_Colour}"
