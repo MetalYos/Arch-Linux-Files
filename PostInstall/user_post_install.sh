@@ -63,6 +63,18 @@ function InstallDisplayManager() {
 	echo -e "${BYellow}[ * ]Install SDDM display manager${End_Colour}"
 	echo "${password}" | sudo -S pacman -S sddm --noconfirm
 	sudo systemctl enable sddm.service
+
+	echo -e "${BYellow}[ * ]Copy default sddm config file to local folder${End_Colour}"
+    echo "${password}" | sudo -S mkdir -p /etc/sddm.conf.d
+    echo "${password}" | sudo -S cp /usr/lib/sddm/sddm.conf.d/default.conf /etc/sddm.conf.d/sddm.conf
+
+	echo -e "${BYellow}[ * ]Install SDDM Astronaut theme manager${End_Colour}"
+    echo "${password}" | sudo -S git clone https://github.com/keyitdev/sddm-astronaut-theme.git /usr/share/sddm/themes/sddm-astronaut-theme
+    echo "${password}" | sudo -S cp /usr/share/sddm/themes/sddm-astronaut-theme/Fonts/* /usr/share/fonts/
+	echo "${password}" | sudo -S sed -i "s/FullBlur=\"false\"/FullBlur=\"true\"/g" /usr/share/sddm/themes/sddm-astronaut-theme/theme.conf
+	echo "${password}" | sudo -S sed -i "s/PartialBlur=\"true\"/PartialBlur=\"false\"/g" /usr/share/sddm/themes/sddm-astronaut-theme/theme.conf
+	echo "${password}" | sudo -S sed -i "s/BlurRadius=\"80\"/BlurRadius=\"20\"/g" /usr/share/sddm/themes/sddm-astronaut-theme/theme.conf
+	echo "${password}" | sudo -S sed -i "s/Current=/Current=sddm-astronaut-theme/g" /etc/sddm.conf.d/sddm.conf
 }
 
 function Installi3() {
