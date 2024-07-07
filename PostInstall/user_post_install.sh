@@ -26,10 +26,9 @@ function InstallAdditionalPackages() {
 	# Install other useful packages
 	echo -e "${BYellow}[ * ]Install useful packages${End_Colour}"
 	echo "${password}" | sudo -S pacman-key --init
-	echo "${password}" | sudo -S pacman -S timeshift dosfstools ntfs-3g iw wpa_supplicant dialog intel-ucode lshw unzip htop wget openssh git gdb valgrind man tldr stow bash-completion reflector --noconfirm
+	echo "${password}" | sudo -S pacman -S timeshift dosfstools ntfs-3g iw wpa_supplicant dialog intel-ucode lshw unzip htop wget openssh git gdb valgrind man tldr stow bash-completion reflector mpv --noconfirm
 
-    yay -S timeshift-autosnap --noconfirm
-    yay -S sioyek --noconfirm
+    yay -S timeshift-autosnap sioyek amberol --noconfirm
 }
 
 function EnableAutoUsbMounting() {
