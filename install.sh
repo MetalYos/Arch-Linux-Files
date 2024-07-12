@@ -169,9 +169,9 @@ function MainMenu() {
 
 		echo -e "${BYellow}[ * ]Connecting to wifi network ${network_name}...${End_Colour}"
 		iwctl --passphrase ${wifi_pass} station ${wifi_station} connect ${wifi_ssid}
-		sleep 3
-		iwctl --passphrase ${wifi_pass} station ${wifi_station} connect ${wifi_ssid}
-		sleep 3
+		
+		echo -e "${BYellow}[ * ]Waiting for ping from google.com...${End_Colour}"
+		until nc -vzw 2 google.com 80; do sleep 2; done
 	fi
 
 	if [[ "$hd_device" == *"sd"* ]]; then
