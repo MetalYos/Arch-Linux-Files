@@ -12,7 +12,7 @@ password=${2}
 
 function InstallAurHelper() {
 	echo -e "${BYellow}[ * ]Install the YAY AUR helper${End_Colour}"
-	cur_dir=pwd
+	cur_dir=`pwd`
 	cd /home/${username}/Downloads
 	echo "${password}" | sudo -S pacman -S git --noconfirm
 	git clone https://aur.archlinux.org/yay.git
@@ -43,7 +43,7 @@ function EnableAutoUsbMounting() {
 	echo "${password}" | sudo -S pacman -S udisks2 udiskie --noconfirm
 
 	echo -e "${BYellow}[ * ]Copying polkit rule for USB storage automounting${End_Colour}"
-	cur_dir=pwd
+	cur_dir=`pwd`
 	cd /PostInstall
 	cp 10-udisks2.rules /etc/polkit-1/rules.d/
 	cd ${cur_dir}
@@ -54,14 +54,12 @@ function InstallPipewireAudio() {
 
 	# Install all relevant Pipewrire packages
 	echo "${password}" | sudo -S pacman -Syu pipewire wireplumber pipewire-alsa pipewire-pulse pipewire-jack lib32-pipewire-jack dkms sof-firmware volumeicon alsa-utils --noconfirm
-	read -p "${BYellow}Press any key to continue...${End_Colour}"
 
 	echo -e "${BYellow}[ * ]Enable Pipewire user units${End_Colour}"
 	systemctl --user enable pipewire.socket
 	systemctl --user enable pipewire-pulse.socket
 	systemctl --user enable wireplumber.service
 	echo -e "${BYellow}[ * ]Install the YAY AUR helper${End_Colour}"
-	read -p "${BYellow}Press any key to continue...${End_Colour}"
 }
 
 function InstallDisplayServer() {
@@ -103,13 +101,14 @@ function Installi3() {
 }
 
 function InstallAuthenticationAgent() {
-	echo "${password}" | sudo -S pacman -S polkit-gnome
+	echo "${password}" | sudo -S pacman -S polkit-gnome --noconfirm
 }
 
 function InstallNotificationServer() {
 	echo -e "${BYellow}[ * ]Notification Server for window manager${End_Colour}"
-	echo "${password}" | sudo -S pacman -S libnotify notification-daemon
-	cur_dir=pwd
+	echo "${password}" | sudo -S pacman -S libnotify notification-daemon --noconfirm
+
+	cur_dir=`pwd`
 	cd /PostInstall
 	echo "${password}" | sudo -S cp org.freedesktop.Notification.service /usr/share/dbus-1/services/
 	cd ${cur_dir}
@@ -122,7 +121,7 @@ function InstallNeovim() {
 
 function CopyConfigFiles() {
 	echo -e "${BYellow}[ * ]Copying relevant config files${End_Colour}"
-	cur_dir=pwd
+	cur_dir=`pwd`
 	cd /home/${username}
 	git clone https://github.com/metalyos/dotfiles.git
 	cd dotfiles
