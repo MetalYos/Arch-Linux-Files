@@ -107,7 +107,7 @@ function InstallNotificationServer() {
 
 function InstallNeovim() {
 	echo -e "${BYellow}[ * ]Install Neovim and other needed packages${End_Colour}"
-	echo "${password}" | sudo -S pacman -S neovim luarocks pyright xclip npm cargo python-pip ripgrep fd --noconfirm
+	echo "${password}" | sudo -S pacman -S neovim luarocks pyright xclip npm cargo python-pip ripgrep fd lazygit --noconfirm
 }
 
 function CopyConfigFiles() {
