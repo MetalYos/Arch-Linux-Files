@@ -79,7 +79,7 @@ function InstallDisplayManager() {
 
 function Installi3() {
 	echo -e "${BYellow}[ * ]Install i3 window manager${End_Colour}"
-	echo "${password}" | sudo -S pacman -S i3-gaps i3blocks i3lock i3status numlockx xss-lock --noconfirm
+	echo "${password}" | sudo -S pacman -S i3-gaps i3blocks i3lock i3status numlockx xss-lock polybar --noconfirm
 
 	# Install some basic fonts
 	echo -e "${BYellow}[ * ]Install some basic fonts${End_Colour}"
