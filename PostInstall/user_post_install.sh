@@ -57,9 +57,9 @@ function InstallPipewireAudio() {
 	read -p "${BYellow}Press any key to continue...${End_Colour}"
 
 	echo -e "${BYellow}[ * ]Enable Pipewire user units${End_Colour}"
-	systemctl --user enable --now pipewire.socket
-	systemctl --user enable --now pipewire-pulse.socket
-	systemctl --user enable --now wireplumber.service
+	systemctl --user enable pipewire.socket
+	systemctl --user enable pipewire-pulse.socket
+	systemctl --user enable wireplumber.service
 	echo -e "${BYellow}[ * ]Install the YAY AUR helper${End_Colour}"
 	read -p "${BYellow}Press any key to continue...${End_Colour}"
 }
