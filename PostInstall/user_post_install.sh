@@ -32,8 +32,7 @@ function InstallAdditionalPackages() {
 
 function InstallAdditionalAurPackages() {
 	echo -e "${BYellow}[ * ]Install useful AUR packages${End_Colour}"
-	yay -S timeshift-autosnap sioyek --noconfirm
-	# yay -S amberol --noconfirm
+	yay -S timeshift-autosnap sioyek amberol --noconfirm
 }
 
 function EnableAutoUsbMounting() {
