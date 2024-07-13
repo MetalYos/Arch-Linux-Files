@@ -27,7 +27,7 @@ function InstallAdditionalPackages() {
 	# Install other useful packages
 	echo -e "${BYellow}[ * ]Install useful packages${End_Colour}"
 	echo "${password}" | sudo -S pacman-key --init
-	echo "${password}" | sudo -S pacman -S timeshift dosfstools ntfs-3g iw wpa_supplicant dialog intel-ucode lshw unzip htop wget openssh git gdb valgrind man tldr stow bash-completion reflector mpv fastfetch transmission-gtk meld tmux cmake clang lib32-clang bear --noconfirm
+	echo "${password}" | sudo -S pacman -S timeshift dosfstools ntfs-3g iw wpa_supplicant dialog intel-ucode lshw unzip htop wget openssh git gdb valgrind man tldr stow bash-completion reflector mpv fastfetch transmission-gtk meld tmux cmake clang lib32-clang bear ninja --noconfirm
 }
 
 function InstallAdditionalAurPackages() {
