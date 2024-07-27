@@ -97,6 +97,9 @@ function Installi3() {
 	echo -e "${BYellow}[ * ]Install extra applications for the i3 window manager${End_Colour}"
 	echo "${password}" | sudo -S pacman -S kitty keepass yazi rofi thunderbird obsidian picom feh --noconfirm
 	yay -S brave-bin --noconfirm
+
+    # install Oh My Posh for the terminal emulator prompt
+    curl -s https://ohmyposh.dev/install.sh | bash -s
 }
 
 function InstallAuthenticationAgent() {
