@@ -95,7 +95,7 @@ function Installi3() {
 
 	# Install needed application
 	echo -e "${BYellow}[ * ]Install extra applications for the i3 window manager${End_Colour}"
-	echo "${password}" | sudo -S pacman -S alacritty keepass ranger rofi thunderbird obsidian picom feh --noconfirm
+	echo "${password}" | sudo -S pacman -S kitty keepass ranger rofi thunderbird obsidian picom feh --noconfirm
 	yay -S brave-bin --noconfirm
 }
 
