@@ -122,7 +122,7 @@ function MountPartitions() {
 function InstallArchBase() {
 	# Install Arch packages
 	echo -e "${BYellow}[ * ]Install Arch packages${End_Colour}"
-	pacstrap -K /mnt base base-devel linux linux-firmware linux-headers btrfs-progs vim nano
+	pacstrap -K /mnt base base-devel linux linux-firmware linux-headers btrfs-progs vim nano unzip
 }
 
 function GenerateFStab() {
